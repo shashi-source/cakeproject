@@ -28,7 +28,7 @@ class Cards extends Component{
                        cakesDetails:this.cakes
                     })
                     // console.log(this.state.cakesDetails);
-                    this.props.history.push('/Cart')
+                    // this.props.history.push('/Cart')
                 }
             },(err)=>{
                 console.log("Error",err)

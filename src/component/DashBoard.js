@@ -14,7 +14,7 @@ import './Dashboard.css'
                 method:"get",
                 url:apiurl
             }).then((res)=>{
-                console.log(res.data);
+                // console.log(res.data);
                 setAllcakes(res.data.data)
             },(err)=>{
                 console.log(err);
@@ -29,7 +29,6 @@ import './Dashboard.css'
             // setsortcake(sortallcakes)
         }
 
-        // console.log(allCakes);
         
         return (
             <div>
@@ -41,7 +40,7 @@ import './Dashboard.css'
                     <h1 class="h2">Dashboard</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                        <button class="btn btn-sm btn-outline-secondary" onClick={sortCake}>Sort</button>
+                    <Link to="/dashboard"><button class="btn btn-sm btn-outline-secondary" onClick={sortCake}>Sort</button></Link>
                         <button class="btn btn-sm btn-outline-secondary dropdown-toggle">Filter</button>
                     </div>
                     <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
@@ -66,7 +65,7 @@ import './Dashboard.css'
                 </main>
                     <div>
                     {allCakes.map((ele,index)=>{
-                        console.log(ele,index);
+                        // console.log(ele,index);
                         return(
                             <div>
                                 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" style={{top:"200px"}}>
@@ -80,7 +79,7 @@ import './Dashboard.css'
                                         <td style={{width:"100px"}}>{ele.price}</td>
                                         <td style={{width:"150px"}}>
                                             <div class="btn-group" role="group" aria-label="Basic example" style={{cursor:"pointer"}}>
-                                            <Link to="/Content"><button type="button" class="btn btn-secondary">+</button></Link>   
+                                            <Link to="/Content"><button type="button" class="btn btn-secondary" onClick={(event)=>console.log(event.target)}>+</button></Link>   
                                             </div>
                                         </td>
                                         </tr>
@@ -98,4 +97,4 @@ import './Dashboard.css'
     )
 }
 
-export default DashBoard
+export default  DashBoard

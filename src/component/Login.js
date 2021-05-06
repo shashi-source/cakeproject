@@ -80,6 +80,7 @@ class Login extends Component{
         }     
     }
     componentDidMount(){
+        console.log(this.props)
         this.login=JSON.parse(localStorage.getItem('email'));
         if(localStorage.getItem('email')){
             this.setState({
@@ -94,7 +95,7 @@ class Login extends Component{
             })
         }
     }
-    componentWillUpdate(nextprops,nextState){
+    componentWillUpdate(nextState){
         localStorage.setItem("email",JSON.stringify(nextState));
     }
     render(){
