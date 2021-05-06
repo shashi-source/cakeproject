@@ -28,15 +28,16 @@ function Search(props){
                 return <Cards cakedata={each}/>
             })}
             {Cakeresult.length<=0 && <div>
-                <div class="card" style={{margin:"160px 530px"}}>
-                    <div class="card-header" style={{backgroundColor:"gray"}}>
-                        <b style={{color:"deepskyblue"}}>Oop!</b> 
-                    </div>
-                    <div class="card-body" style={{backgroundColor:"lightgrey"}}>
-                        <blockquote class="blockquote mb-0">
-                        <p style={{color:"red",fontWeight:"bold"}}>we could not found  this cake</p>
+                        <div class="card" style={{marginLeft:"16em",marginTop:"10em"}}>
+                            <div class="card-header">
+                                    <b>Oop!</b> 
+                                </div>
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0">
+                            <p>Sorry, no results found!</p>               
                         </blockquote>
-                    </div>
+                        <h4>Please check the spelling or try searching for something else</h4>
+                        </div>            
                     </div>
                 </div>}
         </div>
