@@ -1,63 +1,46 @@
-import axios from "axios"
-import {Component} from "react"
-import Cart from "./Cart"
-import {withRouter} from "react-router-dom"
+import { Component } from "react";
+// import {cakeDetail} from './CakeDetails'
+// import { useHistory } from "react-router-dom";
+// import {axios} from 'axios';
+import {Link} from 'react-router-dom';
+// import queryString from "query-string";
 
-class Cards extends Component{
-    constructor(){
-        super()
-        this.state={
-            cakesDetails:[]    
-         }
-    }
+
+class Cards extends Component {
+
     
-    cakes=[]
-
-    cartItem=(event)=>{  
-        // console.log(this.props.match.cakeid);
-        if(event.target){
-            let apiurl=`https://apifromashu.herokuapp.com/api/cake/${this.props.cakedata.cakeid}`
-            axios({
-                method:"get",
-                url:apiurl
-            }).then((res)=>{
-                // console.log("response",res.data);
-               if(res.data){
-                   this.cakes.push(res.data.data)
-                   this.setState({
-                       cakesDetails:this.cakes
-                    })
-                    // console.log(this.state.cakesDetails);
-                    // this.props.history.push('/Cart')
-                }
-            },(err)=>{
-                console.log("Error",err)
-            })     
-        }
+    constructor(props) {
+        super(props)
+        this.state = {}
+        // this.NavigationDemo()
     }
 
-    render(){
-        return(
-            <div>
-                    <div className="card" style={{ height:"28em", width:"20em" , padding:"1rem",margin:"0 22px",top:"70px"}}>
-                        <img src={this.props.cakedata.image} style={{height:"15em"}}  className="card-img-top" alt="..."></img>
-                        <div className="card-body">
-                        <h5 className="card-title">{this.props.cakedata.name}</h5>
-                        <p className="card-text">{this.props.cakedata.price}</p>
-                        <a href="#" className="btn btn-primary" onClick={this.cartItem}>Add to Cart</a>              
-                        </div>
-                    </div>
-                            
-                <div>
-                 {/* send data in Cart component */}                 
-                 {this.state.cakesDetails.map((el)=>{
-                    return <Cart cakeinfo={el}/>
-                })}
-                </div>
+    render() {
+        console.log("state,",this.props)
 
+        return (
+            <div>   
+            <Link to={`/cakedetails/${this.props.cakedata.cakeid}`}>
+            <div onClick = {()=>{
+
+            // this.NavigationDemo(this.props.cakedata.cakeid);
+        }} class="card" style={{width: "15rem" , margin:"1rem",top:"50px",marginLeft:"60px"}}>
+        <img style={{height:"15em"}} src={this.props.cakedata.image} class="card-img-top" alt="..."></img>
+        <div class="card-body">
+                <h5 class="card-title">{this.props.cakedata.name}</h5>                
+                <p class="card-text">Rs{this.props.cakedata.price}</p>  
+                <p class="card-text">{this.props.cakedata.description}</p>                
+                <p class="card-text">{this.props.cakedata.likes}</p>                
+
+          {/* <a href="#" class="btn btn-primary">Go somewhere</a> */}
+        </div>
+    </div>  
+            </Link>
+      
             </div>
         )
     }
-
 }
-export default withRouter(Cards);
+
+export default Cards;
+
