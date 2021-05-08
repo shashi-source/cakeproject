@@ -38,6 +38,7 @@ class Login extends Component{
         }
     }
     login={}
+    message={}
     // get value from form
     getEmail=(event)=>{ 
         this.login.email=event.target.value
@@ -63,21 +64,22 @@ class Login extends Component{
             axios({
                 method:"post",
                 url:"https://apifromashu.herokuapp.com/api/login",
-                data:this.state.login         
-            }).then((res)=>{
-                if(res.data){
-                    toast("Welcome to our Cake Shop");
-                    this.props.history.push('/')
-                    console.log("response",res);
-                }
+                data:this.state.login        
+            }).then((res) => {
+                console.log("my mess", res);
+                this.message = res.data;
+                if(this.message.message !== 'Invalid Credentials'){
+                    toast("Welcome to Our CakeShop");                    
+                    console.log("message ;.....",this.message);
+                    this.props.history.push('/');
+                } else {
+                    toast("Please Check Your Email or Password");
+                }              
             },(err)=>{
-                // console.log("error",err);
-                toast("Oh! Sorry You enter Wrong details");
-            })            
+                console.log("error",err);
+            })                     
         }   
-        else{
-            toast("please Check Your details");
-        }     
+        
     }
     componentDidMount(){
         console.log(this.props)

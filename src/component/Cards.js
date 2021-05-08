@@ -7,7 +7,6 @@ import {Link} from 'react-router-dom';
 
 
 class Cards extends Component {
-
     
     constructor(props) {
         super(props)
@@ -16,7 +15,7 @@ class Cards extends Component {
     }
 
     render() {
-        console.log("state,",this.props)
+        // console.log("state,",this.props)
 
         return (
             <div>   
@@ -32,7 +31,6 @@ class Cards extends Component {
                 <p class="card-text">{this.props.cakedata.description}</p>                
                 <p class="card-text">{this.props.cakedata.likes}</p>                
 
-          {/* <a href="#" class="btn btn-primary">Go somewhere</a> */}
         </div>
     </div>  
             </Link>

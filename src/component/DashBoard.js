@@ -40,7 +40,7 @@ import './Dashboard.css'
                     <h1 class="h2">Dashboard</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                    <Link to="/dashboard"><button class="btn btn-sm btn-outline-secondary" onClick={sortCake}>Sort</button></Link>
+                    <Link to="/dashboard"><button class="btn btn-sm btn-outline-secondary" onClick={sortCake}>price Low to High</button></Link>
                         <button class="btn btn-sm btn-outline-secondary dropdown-toggle">Filter</button>
                     </div>
                     <button class="btn btn-sm btn-outline-secondary dropdown-toggle">

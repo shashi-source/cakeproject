@@ -13,7 +13,7 @@ function CakeDetails(props){
 
     var [cakeresult, setCakes] = useState({});
 
-    console.log("ca",cakeresult,setCakes);
+    // console.log("ca",cakeresult,setCakes);
     // var query = queryString.parse(props.location.cakes);
     // console.log( props.match.params.id);
     let qq= props.match.params.id;
@@ -24,17 +24,14 @@ function CakeDetails(props){
         // alert("hii")
         var apiurl = "https://apifromashu.herokuapp.com/api/cake/"+qq;
         // console.log("apiii",apiurl)
-        let temp = []
+        // let temp = []
         fetch(apiurl)
         .then(res => res.json())
         .then(
           (response) => {
-            console.log('respoo',response)
-           
-       
+            // console.log('respoo',response)
             setCakes(response.data);
-
-            console.log("dddddddddddddddddddddd",cakeresult)
+            // console.log("dddddddddddddddddddddd",cakeresult)
           })
 
       }, [props.match.params.id]);

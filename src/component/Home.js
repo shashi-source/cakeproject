@@ -19,7 +19,7 @@ class Home extends Component{
             url:apiurl,
             method:"get"
         }).then((res)=>{
-            console.log("response",res.data);
+            // console.log("response",res.data);
             this.setState({
                 cakes:res.data.data
             })

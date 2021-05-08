@@ -7,42 +7,37 @@ import queryString from "query-string";
 
 
 class Details extends Component {
-
     
-    constructor(props) {
-        super(props)
-        this.state = {}
-        // this.NavigationDemo()
+    constructor() {
+        super()
+        this.state = {
+            addCart:[]
+        }
     }
+    // Cartapi
+    // https://apifromashu.herokuapp.com/api/addcaketocart
 
+    addCartCake={}
+    addCarts=[]
 
-
-    registers = () => {
-     
-        //   const history = new useHistory();
-        const cartCake = {
-            cakeid: this.props.cakedata.cakeid,
-            name: this.props.cakedata.name,
-            image: this.props.cakedata.image,
-            weight: this.props.cakedata.weight,
-            price: this.props.cakedata.price,
-        };
-    
-        fetch('post', `https://apifromashu.herokuapp.com/api/addcaketocart`, cartCake
-        ).then(res => res.json())
-            .then(
-                (response) => {
-                    console.log('respoonse', response)
-             
-         
-           
-  
-                })
-  
+    addToCartCakes=()=>{
+        this.addCartCake.cakeid=this.props.cakedata.cakeid;      
+        this.addCartCake.name=this.props.cakedata.name;      
+        this.addCartCake.weight=this.props.cakedata.weight;      
+        this.addCartCake.price=this.props.cakedata.price;
+        console.log(this.addCartCake);  
+        
+        var tempObj=this.addCartCake
+        this.addCarts.push(tempObj); 
+        console.log(this.addCarts);
+        this.setState({
+            addCart:this.addCarts
+        })   
+        console.log(this.state.addCart);
     }
 
     render() {
-        console.log("state,", this.props)
+        // console.log("state,", this.props)
 
         return (
             <div class="card mb-3" style={{ maxWidth: "85vw" ,marginLeft:"13em" ,border:"none"}}>
@@ -51,8 +46,8 @@ class Details extends Component {
             
                         // this.NavigationDemo(this.props.cakedata.cakeid);
                                 }}
-                     class="card detail-card" style={{marginTop:"5em"}}>
-              <div class="row no-gutters">
+                     class="card " style={{marginTop:"5em"}}>
+              <div class="row">
                 <div class="col-md-4">
                 <img src={this.props.cakedata.image} style={{height:"100%" ,width:'30vw'}}class="card-img-top cakeImg" alt="..."></img>
                 </div>
@@ -66,20 +61,15 @@ class Details extends Component {
                             <p class="card-text">Flavour : {this.props.cakedata.flavour}</p>  
                             <p class="card-text">Type : {this.props.cakedata.type}</p>                  
                             <p class="card-text">{this.props.cakedata.likes}👩‍👧‍👧</p>   
-                            <button  onClick={(e) => {
-                  e.preventDefault()
-                   console.log("hiiiiii")
-                  this.registers();
-                 
-               }} type="button" class="btn btn-success">Add To Cart<i class="fas fa-cart-plus"></i></button>
+                                        <button  onClick={this.addToCartCakes} type="button" class="btn btn-success">Add To Cart<i class="fas fa-cart-plus"></i></button>
                   </div>
-            
                 </div>
                     </div>
                     </div>
                     </Link>
             </div>
         )
+
     }
 }
 
