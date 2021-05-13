@@ -67,6 +67,8 @@ class Login extends Component{
                 data:this.state.login        
             }).then((res) => {
                 console.log("my mess", res);
+                console.log(res.data.token);
+                localStorage.setItem("tokenId",res.data.token)
                 this.message = res.data;
                 if(this.message.message !== 'Invalid Credentials'){
                     toast("Welcome to Our CakeShop");                    
@@ -78,27 +80,7 @@ class Login extends Component{
             },(err)=>{
                 console.log("error",err);
             })                     
-        }   
-        
-    }
-    componentDidMount(){
-        console.log(this.props)
-        this.login=JSON.parse(localStorage.getItem('email'));
-        if(localStorage.getItem('email')){
-            this.setState({
-                nameErr:this.login.name,
-                passErr:this.login.email
-            })
-        }
-        else{
-            this.setState({
-                nameErr:"",
-                passErr:""
-            })
-        }
-    }
-    componentWillUpdate(nextState){
-        localStorage.setItem("email",JSON.stringify(nextState));
+        }      
     }
     render(){
         return(

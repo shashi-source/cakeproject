@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Content() {
+function Content() {
     return (
         <div style={{top:"50px"}}>
             <div style={{backgroundColor:"lightgray",position:"fixed",left:"0px",right:"0px"}}>
@@ -36,3 +36,4 @@ export default function Content() {
         </div>
     )
 }
+export default Content
