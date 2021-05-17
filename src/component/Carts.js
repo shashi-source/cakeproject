@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { Component } from 'react'
-import CheckOut from './CheckOut';
 import Product from './Product';
+import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
  class Carts extends Component {
      constructor(props) {
@@ -22,25 +23,23 @@ import Product from './Product';
             this.setState({
                 cake:res.data.data
             })
-            console.log(this.state.cake)
+            this.props.dispatch({
+                type:"PLACE_ORDER",
+                payload:res.data
+            })
+            // console.log(this.state.cake)
          },(err)=>{
              console.log("Error",err);
          })
      }
-     
-        //    <div>
-        //     {/* {this.state.cake.map((ele)=>{
-        //         <CheckOut product={ele}/>
-        //     })} */}
-        //    </div>
-    //<button className="btn btn-outline-primary"  style={{top:"6em",marginLeft:"900px"}}>CheckOut</button> 
-       
-     
+          
     render() {
+        // console.log(this.state.cake)
         return (
+
             <div>
             <div class="col-md-5 ml-sm-auto col-lg-10 px-md-1" style={{top:"6em",right:"10em"}}>   
-            <CheckOut/>
+           <Link to="/Checkout"><button className="btn btn-outline-primary"  style={{top:"6em",marginLeft:"900px"}}>CheckOut</button></Link>  
             <table class="table">
                             
                      <thead>
@@ -54,8 +53,9 @@ import Product from './Product';
                         </tr>
                     </thead>
             </table>
+            
                 </div>
-
+                    
                     <div  className="row">
                   {this.state.cake.map((ele)=>{
                       return <Product cakecart={ele}/>
@@ -68,4 +68,9 @@ import Product from './Product';
         )
     }
 }
-export default Carts
+export default connect((state,props)=>{
+console.log(state)
+return{
+    order_place:state["order_place"]
+}
+})(Carts)

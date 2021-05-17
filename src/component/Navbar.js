@@ -1,11 +1,18 @@
 import {Component} from "react"
 import { Link } from "react-router-dom"
+import { connect } from "react-redux"
+
+
+
 
 class Navbar extends Component{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state={
-            searchtext:undefined
+            searchtext:undefined,
+            // token:{},
+            // isToken:false
+            isloggedin:false
         }
     }
     searchtext
@@ -14,13 +21,32 @@ class Navbar extends Component{
            searchtext:event.target.value
        })
     }
-    token=localStorage.getItem("tokenId")
+
+    componentDidMount() {
+        console.log(this.props.isloggedin);
+        // let token=localStorage.getItem("tokenId")
+        // if(token){
+        //     this.setState({
+        //         isToken:true,
+        //     },()=>{console.log(this.state.isToken)})        
+        // }
+    }
+    
     
     // logout
     logout=()=>{
-        localStorage.removeItem("tokenId");
-    }
+        
+         this.props.dispatch({
+            type:"LOGIN",
+            payload:localStorage.removeItem("tokenId")  
+            })
 
+    //  if(!token){
+    //      this.setState({
+    //      isToken:false,
+    //     },()=>{console.log("Logout success......")})
+    //  }
+    }
     render()
     {
         return(
@@ -31,7 +57,6 @@ class Navbar extends Component{
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
@@ -49,11 +74,15 @@ class Navbar extends Component{
                     <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-1.646-7.646-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708z"/>
                     </svg></button></Link>&emsp;
                    
-                   {!this.token?<Link to="/login"><button  className="btn btn-outline-info" style={{color:"#fff"}}>Login</button></Link>:<button type="button" className="btn btn-outline-info" onClick={this.logout}>Logout</button>} 
+                   {!this.props.isloggedin?<button type="button" className="btn btn-outline-info" onClick={this.logout.bind(this)}>Logout</button>:<Link to="/login"><button  className="btn btn-outline-info" style={{color:"#fff"}}>Login</button></Link>} 
                 </div>
             </nav>
         </div>
         )
     }
 }
-export default Navbar;
+export default connect((state, props) => {
+    console.log(state);
+    return {
+      isloggedin:state["isloggedin"]}
+  })(Navbar)

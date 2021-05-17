@@ -15,7 +15,7 @@ import CakeDetails from "./component/CakeDetails";
 import Details from "./component/Details"
 import Carts from './component/Carts';
 import Product from './component/Product';
-// import CheckOut from './component/CheckOut';
+import CheckOut from './component/CheckOut';
 
 function App() {
   return (
@@ -35,7 +35,7 @@ function App() {
         <Route exact path="/details/:id"component={Details}/>
         <Route path="/cart"  component={Carts}/>
         <Route path="/products" component={Product}/>
-        {/* <Route path="/checkout" component={CheckOut}/> */}
+        <Route path="/checkout" component={CheckOut}/>
       </div>
       </BrowserRouter>
       <ToastContainer />

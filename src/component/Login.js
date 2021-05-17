@@ -2,6 +2,9 @@ import {Component} from "react"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 import axios from "axios"
+import { connect } from "react-redux"
+
+
 class Login extends Component{
     constructor(props){
         super(props)
@@ -73,6 +76,10 @@ class Login extends Component{
                 if(this.message.message !== 'Invalid Credentials'){
                     toast("Welcome to Our CakeShop");                    
                     console.log("message ;.....",this.message);
+                    this.props.dispatch({
+                        type:"LOGIN",
+                        payload:res.data
+                    })
                     this.props.history.push('/');
                 } else {
                     toast("Please Check Your Email or Password");
@@ -109,4 +116,4 @@ class Login extends Component{
         )
     }
 }
-export default Login
+export default connect()(Login)

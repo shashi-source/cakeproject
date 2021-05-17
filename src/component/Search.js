@@ -5,18 +5,21 @@ import Cards from "./Cards"
 
 function Search(props){
     var [Cakeresult,setCakes]=useState([]);
+    var [isloading,setloading]=useState(false);
+    
     var query=queryString.parse(props.location.search)
     console.log("aa gyi ",query.q);
     
     useEffect(()=>{
-        
         var apiurl="https://apifromashu.herokuapp.com/api/searchcakes?q="+query.q
+        setloading(true)
         axios({
             method:"get",
             url:apiurl            
         }).then((res)=>{
             console.log("response",res.data);
             setCakes(res.data.data)
+            setloading(false);
         },(err)=>{
             console.log("Error",err);
         })
@@ -24,6 +27,12 @@ function Search(props){
 
     return(
         <div className="row">
+            {isloading && <div>
+            <div class="d-flex justify-content-center" style={{margin:"100px 100px"}}>
+             <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+            </div>
+            </div></div>}
             {Cakeresult.map((each)=>{        
                 return <Cards cakedata={each}/>
             })}

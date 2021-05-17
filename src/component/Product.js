@@ -24,24 +24,27 @@ class Product extends Component {
     }
     
     add=()=>{
+        // console.log(this.props)
         this.setState({
             qty:this.state.qty+1
         })
-        console.log(this.state.qty);
+        // console.log(this.state.qty);
     }
     subtract=()=>{
         this.setState({
             qty:this.state.qty-1
         })
-        console.log(this.state.qty)
+        // console.log(this.state.qty)
     }
-    total={}
+    price={}
     buy=()=>{
+        
         console.log(this.state.qty);
-        console.log(this.props.cakecart.price)
-        this.total.price=this.state.qty*this.props.cakecart.price;
-        console.log(this.total);
+        console.log(this.props.cakecart.price);
+        this.price.price=this.state.qty*this.props.cakecart.price;
+        console.log(this.price)       
     }
+    
     
     render() {
         return (
