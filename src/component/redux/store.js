@@ -13,6 +13,9 @@ store.dispatch({
 store.dispatch({
     type:"PLACED_ORDERS"
 })
+store.dispatch({
+    type:"ORDER_LIST"
+})
 
 
 console.log("after dispatch store ka state" , store.getState()) //to get the state from reducer

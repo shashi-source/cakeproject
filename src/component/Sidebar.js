@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {Link} from 'react-router-dom'
 
  function Sidebar() {
     return (
@@ -22,10 +22,10 @@ import React from 'react'
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                        <span data-feather="shopping-cart"></span>
-                        Products
-                        </a>
+                     <Link to="/addCake"><a class="nav-link" href="#">
+                        <span data-feather="users"></span>
+                         Add Cakes
+                        </a></Link>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
@@ -40,10 +40,8 @@ import React from 'react'
                         </a>
                     </li>
                     </ul>
-
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                     <span style={{color:"#85EEDF"}}>Saved reports</span>
-                   
                     </h6>
                     <ul class="nav flex-column mb-2">
                     <li class="nav-item">

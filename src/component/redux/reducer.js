@@ -14,7 +14,12 @@ export function shashi (state ={},{type,payload}){
             state={...state}
             state["placed_orders"]=payload
             return state
-        }        
+        } 
+        case "ORDER_LIST":{
+            state={...state}
+            state["order_list"]=payload
+            return state
+        }       
         default : return state
     }
  }

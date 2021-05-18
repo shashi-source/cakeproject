@@ -16,6 +16,8 @@ import Details from "./component/Details"
 import Carts from './component/Carts';
 import Product from './component/Product';
 import CheckOut from './component/CheckOut';
+import OrderList from './component/OrderList';
+import AddCake from './component/AddCake';
 
 function App() {
   return (
@@ -36,6 +38,8 @@ function App() {
         <Route path="/cart"  component={Carts}/>
         <Route path="/products" component={Product}/>
         <Route path="/checkout" component={CheckOut}/>
+        <Route path="/orderlist" component={OrderList}/>
+        <Route path="/addCake" component={AddCake}/>
       </div>
       </BrowserRouter>
       <ToastContainer />

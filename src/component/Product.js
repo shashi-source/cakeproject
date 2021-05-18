@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import {connect} from 'react-redux'
 
 class Product extends Component {
     cakes=[]
@@ -7,7 +8,7 @@ class Product extends Component {
         super(props)
         this.state = {
         qty:1,
-        totals:[]
+        // totals:[]
         }
         this.add = this.add.bind(this);
         this.subtract = this.subtract.bind(this);
@@ -54,12 +55,12 @@ class Product extends Component {
        <table class="table">   
             <tbody>
                 <tr>
-                <td style={{width:"100px"}} ><img style={{height:"50px",width:"50px"}} src={this.props.cakecart.image} class="card-img-top" alt="..."></img></td>
+                <td style={{width:"150px"}} ><img style={{height:"50px",width:"50px"}} src={this.props.cakecart.image} class="card-img-top" alt="..."></img></td>
                 <td style={{width:"300px"}} >{this.props.cakecart.name}</td>
                 <td style={{width:"150px"}} >Rs{this.props.cakecart.price}</td>     
-                <td style={{width:"230px"}} >{this.props.cakecart.weight}</td>     
+                <td style={{width:"300px"}} >{this.props.cakecart.weight}</td>     
                 <td style={{width:"260px"}} ><button type="button" class="btn" onClick={this.add}>+</button>{this.state.qty}<button type="button" class="btn" onClick={this.subtract} disabled={this.state.qty < 2}>-</button></td>                             
-                <td style={{width:"200px"}} >
+                <td style={{width:"250px"}} >
                     <button type="button"  onClick={this.remove} class="btn btn-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                     <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                     </svg></button>
@@ -74,4 +75,6 @@ class Product extends Component {
     }
 }
 // total:this.props.cakecart*this.state.qty
-export default  Product
+export default  connect((state,props)=>{
+console.log(state)
+})(Product)
