@@ -7,14 +7,13 @@ var store  = createStore(shashi,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__
 store.dispatch({
     type:"LOGIN"
 })
-
 store.dispatch({
     type:"PLACE_ORDER"
 })
+store.dispatch({
+    type:"PLACED_ORDERS"
+})
 
-
-
-// console.log("after dispatch logout",store.getState())
 
 console.log("after dispatch store ka state" , store.getState()) //to get the state from reducer
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-
+import axios from 'axios'
+import {toast} from 'react-toastify'
 
  class CheckOut extends Component {
      constructor(props) {
@@ -35,7 +36,7 @@ import {connect} from 'react-redux'
          this.placeOrder.city=event.target.value
      }
      pin=(event)=>{
-         this.placeOrder.pin=event.target.value
+         this.placeOrder.pincode=event.target.value
      }
      phone=(event)=>{
         this.placeOrder.phone=event.target.value
@@ -43,8 +44,20 @@ import {connect} from 'react-redux'
     
     orderPlace=(event)=>{
         event.preventDefault()
-        console.log(this.placeOrder);     
-        
+        // console.log(this.placeOrder);     
+        let apiurl="https://apifromashu.herokuapp.com/api/addcakeorder"
+        axios({
+            method:"post",
+            url:apiurl,
+            data:this.placeOrder,
+            headers:{"authtoken":localStorage.tokenId}
+        }).then((res)=>{
+            toast.success(res.data.messageg,{autoClose:2000})
+            this.props.dispatch({
+                type:"PLACED_ORDERS",
+                payload:res.data
+            })
+        },(err)=>{console.log(err)})
     }
     
     render(){
@@ -52,7 +65,7 @@ import {connect} from 'react-redux'
             <div style={{margin:"-30px"}}>
             <div style={{backgroundColor:"lightgray",position:"fixed",left:"0px",right:"0px"}}>
             <div style={{width:"400px" ,margin:"100px 450px"}}>
-                <form style={{border:"2px solid #7E7C7C",boxShadow:"2px"}} >
+                <form >
                     <h1 style={{color:"red"}}>Order Details</h1>
                 <div className="form-group">
                     <label for="exampleInputId"> Name</label>

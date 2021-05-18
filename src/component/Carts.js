@@ -6,8 +6,7 @@ import {Link} from 'react-router-dom'
 
  class Carts extends Component {
      constructor(props) {
-         super(props)
-         
+         super(props)         
          this.state = {
              cake:[]
             }
@@ -15,7 +14,7 @@ import {Link} from 'react-router-dom'
         // cakes=[]
      componentDidMount() {
          console.log(this.props);
-         axios.post("https://apifromashu.herokuapp.com/api/cakecart",{},{ //image not working here
+         axios.post("https://apifromashu.herokuapp.com/api/cakecart",{},{ 
             headers:{"authtoken":localStorage.tokenId}
          }).then((res)=>{
              console.log("res",res.data);
