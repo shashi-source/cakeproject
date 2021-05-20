@@ -1,101 +1,90 @@
-import React from 'react'
-import {useState,useEffect} from "react"
-import {Link} from "react-router-dom"
-import axios from 'axios';
-import Sidebar from "./Sidebar"
-import './Dashboard.css'
+import { useState, useEffect } from "react";
+import axios from "axios";
+import './Dashboard.css';
+import { Link } from "react-router-dom";
+// import Loader from "react-loader-spinnner";
 
- function DashBoard() {
-    const [allCakes,setAllcakes] = useState([]);
-    // const [sortAllCakes,setsortcake]=useState([])
-        useEffect(() => {
-            let apiurl="https://apifromashu.herokuapp.com/api/allcakes"
-            axios({
-                method:"get",
-                url:apiurl
-            }).then((res)=>{
-                // console.log(res.data);
-                setAllcakes(res.data.data)
-            },(err)=>{
-                console.log(err);
-            })
-        },[])
 
-        function sortCake(){
-            let sortallcakes= allCakes.sort((a,b)=>{
-                return(a.price-b.price)
-            })
-            console.log(sortallcakes);   
-            // setsortcake(sortallcakes)
-        }
+function DashBoard() {  
+  const [allCakes, setCakes] = useState([]); 
+  // let [sortcake , setsortcake]= useState([]);
 
-        
-        return (
-            <div>
-            {/* {console.log(sortAllCakes)} */}
-            <Sidebar/>
-            <div>
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 fixed-top" style={{top:"50px",backgroundColor:"#fff",zIndex:10}}>
-                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Dashboard</h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group mr-2">
-                    <Link to="/dashboard"><button class="btn btn-sm btn-outline-secondary" onClick={sortCake}>price Low to High</button></Link>
-                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle">Filter</button>
-                    </div>
-                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                        <span data-feather="calendar"></span>
-                        This week
-                    </button>
-                    </div>
+  useEffect(() => {
+    
+    axios({
+      method: "get",
+      url:"https://apifromashu.herokuapp.com/api/allcakes"
+    }).then((response) => {      
+     console.log(response.data);
+    //  setsortcake(response.data.data)
+      setCakes(response.data.data)
+      // cake()
+
+},
+    (error) => {
+        console.log(error);
+     }
+    
+)
+  }, [])
+
+  
+  let onbuton = () => {
+    let bun = allCakes.sort((a, b) => {
+      return (a.price - b.price)      
+    })
+    console.log(bun);
+   }
+  return (
+      <div>  
+      <div >
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" style={{margin:"7em"}}>
+          <h3 style={{fontFamily:"cursive"}}>All Cakes</h3>         
+         
+          <div class="table-responsive" style={{marginTop:'2.5em',marginBottom:"-7em"}}>
+            <table class="table" >
+              <thead >
+                <tr style={{height:'3em'}}>
+                  <th style={{width:"110px"}}>ID</th>
+                  <th style={{width:"100px"}}>Image</th>
+                  <th style={{width:"150px"}}>Name</th>
+                  <th style={{width:"100px"}}>Price</th>
+                  <th style={{width:"150px"}}> <Link to="/Addcake"><button class="btn btn-sm btn-outline-secondary">New cake</button></Link></th>                  
+                </tr>
+              </thead>              
+            </table>
+          </div>
+        </main>     
+        {         
+          allCakes.map((ele, index) => {
+            return ( 
+              <div >               
+                <main role="main" class=" ml-sm-auto col-lg-10 "  style={{marginRight:"6.8em"}}>
+                        <div >
+                            <table class="table table-striped table-sm"  style={{height:"2em"}}>
+                            <tbody>
+                                <tr >
+                                <td style={{width:"110px"}}>{ele.cakeid}</td>
+                                <td style={{width:"100px"}}><img src={ele.image} style={{height:"50px",width:"50px"}}></img></td>
+                                <td style={{width:"150px"}}>{ele.name}</td>
+                                <td style={{width:"100px"}}>{ele.price}</td>
+                                <td style={{width:"150px"}}>
+                                <div> 
+                                   <Link to="/productForm"><button  class="btn btn-secondary">+</button></Link>
+                               <button class="btn btn-secondary">-</button>
+                                 </div>
+                             </td>
+                           </tr>
+                      </tbody>
+                     </table>
                 </div>
-
-                <div class="table-responsive">
-                    <table class="table table-striped table-sm">
-                    <thead>
-                        <tr>
-                        <th>#</th>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Action</th>
-                        </tr>
-                    </thead>
-                    </table>
-                </div>
-                </main>
-                    <div>
-                    {allCakes.map((ele,index)=>{
-                        // console.log(ele,index);
-                        return(
-                            <div>
-                                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" style={{top:"200px"}}>
-                                <div class="table-responsive" style={{alignItems:"center"}}>
-                                    <table class="table table-striped table-sm">
-                                    <tbody style={{padding:"10px"}}>
-                                        <tr >
-                                        <td style={{width:"50px"}}>{index+1}</td>
-                                        <td style={{width:"100px"}}><img src={ele.image} style={{height:"50px",width:"50px"}}></img></td>
-                                        <td style={{width:"150px"}}>{ele.name}</td>
-                                        <td style={{width:"100px"}}>{ele.price}</td>
-                                        <td style={{width:"150px"}}>
-                                            <div class="btn-group" role="group" aria-label="Basic example" style={{cursor:"pointer"}}>
-                                            <Link to="/content"><button type="button" class="btn btn-secondary" onClick={(event)=>console.log(event.target)}>+</button></Link>   
-                                            </div>
-                                        </td>
-                                        </tr>
-                                    </tbody>
-                                    </table>
-                                    </div>
-                                </main>  
-                            </div>
-                            )                     
-                    })}  
-                    </div>                
-            </div>
-          
-        </div>
-    )
+           </main>
+              </div>)
+              })
+             }
+       </div>
+    </div>
+  );
 }
 
-export default  DashBoard
+export default DashBoard;

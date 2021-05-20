@@ -72,6 +72,7 @@ class Login extends Component{
                 console.log("my mess", res);
                 console.log(res.data.token);
                 localStorage.setItem("tokenId",res.data.token)
+                localStorage.setItem("name",res.data.name)
                 this.message = res.data;
                 if(this.message.message !== 'Invalid Credentials'){
                     toast("Welcome to Our CakeShop");                    

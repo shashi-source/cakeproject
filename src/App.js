@@ -1,4 +1,4 @@
-// import logo from './logo.svg';
+import React, { Suspense } from 'react';
 import './App.css';
 import {BrowserRouter , Route} from "react-router-dom"
 import Navbar from "./component/Navbar"
@@ -15,9 +15,12 @@ import CakeDetails from "./component/CakeDetails";
 import Details from "./component/Details"
 import Carts from './component/Carts';
 import Product from './component/Product';
-import CheckOut from './component/CheckOut';
+// import CheckOut from './component/CheckOut';
 import OrderList from './component/OrderList';
 import AddCake from './component/AddCake';
+import Routes from './component/Routes';
+import CartUi from './component/CartUi';
+const OtherComponent = React.lazy(() => import('./component/DashBoard'));
 
 function App() {
   return (
@@ -31,14 +34,20 @@ function App() {
         <Route path="/Signup" exact component={Signup}></Route>
         <Route path="/Search" exact component={Search}></Route>
         <Route path="/Forgetpass" exact component={Forgetpass}></Route>
-        <Route path="/dashboard" exact component={DashBoard}></Route>
+        <Route path="/dashboard" exact component={DashBoard}>
+        <Suspense fallback={<div>Loading...</div>}>
+        <OtherComponent />
+        </Suspense>
+        </Route>
         <Route path="/content" exact component={Content}></Route>
         <Route exact path="/cakedetails/:id" exact component={CakeDetails} />
         <Route exact path="/details/:id"component={Details}/>
         <Route path="/cart"  component={Carts}/>
         <Route path="/products" component={Product}/>
-        <Route path="/checkout" component={CheckOut}/>
+        <Route exact path="/routes" component={Routes}/>
+        {/* <Route path="/checkout" component={CheckOut}/> */}
         <Route path="/orderlist" component={OrderList}/>
+        <Route path="/cartui" component={CartUi}/>
         <Route path="/addCake" component={AddCake}/>
       </div>
       </BrowserRouter>

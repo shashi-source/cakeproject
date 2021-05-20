@@ -37,10 +37,14 @@ class Navbar extends Component{
             {/* #A93226 */}
           <nav className="navbar  navbar-expand-lg fixed-top navbar-light" style={{backgroundColor:"#A93226",zIndex:30}} >
                 <Link to="/"><a className="navbar-brand" href="#" style={{color:"#fff" ,fontWeight:"bold",fontFamily:"sans",fontSize:"1.5rem"}}><span style={{color:"#F39898"}}>My Cake </span>Shop</a></Link>
+
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                
+                {this.props.isloggedin &&<p style={{ marginLeft: "2em", fontFamily: "cursive", fontSize: "1.2em",color:"#fff" }}>{`Welcome  ${localStorage.name}`}</p>}   
+                
+                &emsp;<div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
                     <form className="form-inline my-2 my-lg-0" >
