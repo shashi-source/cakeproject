@@ -5,9 +5,6 @@ import {shashi} from "./reducer" //initials value declared in reducer
 var store  = createStore(shashi,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())//initial value
 
 store.dispatch({
-    type:"LOGIN"
-})
-store.dispatch({
     type:"PLACE_ORDER"
 })
 store.dispatch({

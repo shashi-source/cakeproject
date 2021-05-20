@@ -13,9 +13,6 @@ class Details extends Component {
         }
         
     }
-    // Cartapi
-    // https://apifromashu.herokuapp.com/api/addcaketocart
-
     message={}
     addCart=[]
     addCartPro={}
@@ -80,8 +77,7 @@ class Details extends Component {
                 </div>
                     </div>
                     </div>
-                    </Link>
-                
+                    </Link>          
             </div>
             </div>
         )

@@ -7,20 +7,23 @@ import {toast} from 'react-toastify'
      constructor(props) {
          super(props)
          this.state={
-            
+            price:0
          }
      }
      total=0
      cakes=[]
     componentDidMount() {
-        console.log(this.props.order_place)
+        // console.log(this.props.order_place)
         this.props.order_place.data.map((each)=>{
             // console.log(each)
              this.cakes.push(each.name);
             this.total=this.total+each.price;
+            this.setState({
+                price:this.total
+            })
         });
-        console.log(this.cakes)
-        console.log(this.total);  
+        // console.log(this.cakes)
+        // console.log(this.total);  
         this.placeOrder.price=this.total
         this.placeOrder.cakes=this.cakes
     }
@@ -57,17 +60,19 @@ import {toast} from 'react-toastify'
                 type:"PLACED_ORDERS",
                 payload:res.data
             })
+           
         },(err)=>{console.log(err)})
     }
     
     render(){
+        console.log(this.state.price);
         return (
             <div style={{margin:"-30px"}}>
             <div style={{backgroundColor:"lightgray",position:"fixed",left:"0px",right:"0px"}}>
             <div style={{width:"400px" ,margin:"100px 450px"}}>
                 <form >
                     <h1 style={{color:"red"}}>Order Details</h1>
-                <div className="form-group">
+                <div className="form-group overflow-auto">
                     <label for="exampleInputId"> Name</label>
                     <input type="text" onChange={this.userName.bind(this)}  className="form-control" id="exampleInputId" aria-describedby="IdHelp" ></input>
                 </div>
@@ -87,15 +92,9 @@ import {toast} from 'react-toastify'
                     <label for="exampleInputName">phone No</label>
                     <input type="number" onChange={this.phone.bind(this)} className="form-control" id="exampleInputName"></input>
                 </div>
-                
-                <div className="form-group">
-                    <label for="exampleInputName">Cakes</label>
-                    <input type="text" className="form-control" id="exampleInputName">
-                    </input>
-                </div>
                 <div className="form-group">
                     <label for="exampleInputPrice">price</label>
-                    <input type="Number" className="form-control" id="exampleInputPrice" ></input>
+                    <input type="Number" className="form-control" id="exampleInputPrice" placeholder={`Rs:${this.state.price}`}></input>
                 </div>
                 <button type="submit" className="btn btn-success" onClick={this.orderPlace.bind(this)}>Order Place</button>
                 </form>

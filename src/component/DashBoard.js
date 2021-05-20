@@ -80,7 +80,7 @@ import './Dashboard.css'
                                         <td style={{width:"100px"}}>{ele.price}</td>
                                         <td style={{width:"150px"}}>
                                             <div class="btn-group" role="group" aria-label="Basic example" style={{cursor:"pointer"}}>
-                                            <Link to="/Content"><button type="button" class="btn btn-secondary" onClick={(event)=>console.log(event.target)}>+</button></Link>   
+                                            <Link to="/content"><button type="button" class="btn btn-secondary" onClick={(event)=>console.log(event.target)}>+</button></Link>   
                                             </div>
                                         </td>
                                         </tr>

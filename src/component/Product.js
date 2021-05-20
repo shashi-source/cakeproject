@@ -55,10 +55,10 @@ class Product extends Component {
        <table class="table">   
             <tbody>
                 <tr>
-                <td style={{width:"150px"}} ><img style={{height:"50px",width:"50px"}} src={this.props.cakecart.image} class="card-img-top" alt="..."></img></td>
+                <td style={{width:"100px"}} ><img style={{height:"50px",width:"50px"}} src={this.props.cakecart.image} class="card-img-top" alt="..."></img></td>
                 <td style={{width:"300px"}} >{this.props.cakecart.name}</td>
-                <td style={{width:"150px"}} >Rs{this.props.cakecart.price}</td>     
-                <td style={{width:"300px"}} >{this.props.cakecart.weight}</td>     
+                <td style={{width:"130px"}} >Rs{this.props.cakecart.price}</td>     
+                <td style={{width:"250px"}} >{this.props.cakecart.weight}</td>     
                 <td style={{width:"260px"}} ><button type="button" class="btn" onClick={this.add}>+</button>{this.state.qty}<button type="button" class="btn" onClick={this.subtract} disabled={this.state.qty < 2}>-</button></td>                             
                 <td style={{width:"250px"}} >
                     <button type="button"  onClick={this.remove} class="btn btn-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">

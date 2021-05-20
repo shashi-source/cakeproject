@@ -8,7 +8,8 @@ import { useState, useEffect } from "react";
 
 function CakeDetails(props){
 
-    var [cakeresult, setCakes] = useState({});    
+    var [cakeresult, setCakes] = useState({}); 
+    var [isloading,setloading]=useState(true)   
     let qq= props.match.params.id;
 
 
@@ -20,21 +21,25 @@ function CakeDetails(props){
       }).then((res)=>{
         console.log("res",res.data);
         setCakes(res.data.data)
+        setloading(false)
       },(err)=>{
         console.log("Error",err);
       })
     },[props.match.params.id]);
         
-    
-  
         return (
             <div>
-            <div className="row">
-                 <Details cakedata={cakeresult} />
+                {isloading && <div>
+                <div class="d-flex justify-content-center" style={{margin:"100px 100px"}}>
+                <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+                </div>
+                </div></div>}
               
-              </div>
+                  {!isloading && <div className="row">
+                    <Details cakedata={cakeresult} />
+                  </div>}
             </div>
-        
         )
     }
 export default CakeDetails;
