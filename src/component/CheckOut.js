@@ -13,7 +13,7 @@ import {toast} from 'react-toastify'
      total=0
      cakes=[]
     componentDidMount() {
-        // console.log(this.props.order_place)
+        console.log(this.props.order_place)
         this.props.order_place.data.map((each)=>{
             // console.log(each)
              this.cakes.push(each.name);
@@ -26,6 +26,7 @@ import {toast} from 'react-toastify'
         // console.log(this.total);  
         this.placeOrder.price=this.total
         this.placeOrder.cakes=this.cakes
+        
     }
     placeOrder={}
 

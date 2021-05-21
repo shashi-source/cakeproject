@@ -2,6 +2,8 @@ import {useState,useEffect} from "react"
 import queryString from "query-string"
 import axios from "axios"
 import Cards from "./Cards"
+import Loader from "react-loader-spinner"
+
 
 function Search(props){
     var [Cakeresult,setCakes]=useState([]);
@@ -27,12 +29,9 @@ function Search(props){
 
     return(
         <div className="row">
-            {isloading && <div>
-            <div class="d-flex justify-content-center" style={{margin:"100px 100px"}}>
-             <div class="spinner-border" role="status">
-            <span class="sr-only">Loading...</span>
-            </div>
-            </div></div>}
+            {isloading && <div style={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center", marginTop: "20em" }}>
+                        <Loader type="ThreeDots" color="#00BFFF" height={80} width={100} />                        
+                    </div>}
               
             {!isloading && Cakeresult.map((each)=>{        
                 return <Cards cakedata={each}/>

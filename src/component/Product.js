@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
+import Loader from 'react-loader-spinner'
+import { toast } from 'react-toastify'
 
 class Product extends Component {
     cakes=[]
@@ -8,17 +10,35 @@ class Product extends Component {
         super(props)
         this.state = {
         qty:1,
-        // totals:[]
+        cakeInfos:[]
         }
         this.add = this.add.bind(this);
         this.subtract = this.subtract.bind(this);
     }
+
+    cakeinfos=[]
+    componentDidMount() {
+        this.cakeinfos.push(this.props.cakecart);
+        this.setState({
+            cakeInfos:this.cakeinfos
+        })
+    }
+    
+
     remove = () => {
-        console.log(this.props.cakecart.cakeid)
+        // console.log(this.props.cakecart)
+        this.setState({isloading:true})
         axios.post('https://apifromashu.herokuapp.com/api/removecakefromcart', { cakeid: this.props.cakecart.cakeid },
             { headers: { "authtoken": localStorage.tokenId } })
             .then((res) => {            
-            console.log(res)
+            // console.log(res);      
+            if(res){
+                toast.warn("Item is removed");
+                this.setState({
+                    cakeinfos:this.cakeinfos.splice(0,1)
+                })   
+            }
+            
         }, (err) => {
             console.log(err)
         })
@@ -38,21 +58,17 @@ class Product extends Component {
         // console.log(this.state.qty)
     }
     price={}
-    buy=()=>{
-        
-        console.log(this.state.qty);
-        console.log(this.props.cakecart.price);
-        this.price.price=this.state.qty*this.props.cakecart.price;
-        console.log(this.price)       
-    }
+  
     
     
     render() {
+        // console.log(this.state.cakeInfos)
         return (
-            <div>
-        <div>
+            <div>           
+
+        {!this.state.cakeInfos.length-1 && <div>
         <div class="col-md-5 ml-sm-auto col-lg-10 px-md-1" style={{top:"6em",right:"3rem"}}>            
-       <table class="table">   
+        <table class="table">   
             <tbody>
                 <tr>
                 <td style={{width:"100px"}} ><img style={{height:"50px",width:"50px"}} src={this.props.cakecart.image} class="card-img-top" alt="..."></img></td>
@@ -69,7 +85,8 @@ class Product extends Component {
             </tbody>  
             </table> 
             </div>
-           </div>
+           </div>}
+           
         </div>
            )
     }

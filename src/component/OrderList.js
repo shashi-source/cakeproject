@@ -35,16 +35,15 @@ class OrderList extends Component {
                 <table class="table" style={{marginTop:"100px"}}>
                     <thead class="thead-dark">
                         <tr>
-                        <th scope="col">Orders</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">price</th>
+                        <th scope="col">Order List</th>
                         </tr>
                     </thead>
                 </table>
 
                     <div>
                     {this.state.orderCakeList.map((ele,index)=>{
-                        return(
+                       console.log(ele)
+                       return(
                                 <div class="accordion"   id="accordionExample">
                                     <div class="card">
                                         <div class="card-header" id="headingOne">
@@ -52,27 +51,34 @@ class OrderList extends Component {
                                             <button class="btn  btn-block text-left" onClick={(event)=>{
                                                  console.log(event.target)
                                             }} type="button" data-toggle="collapse"  data-target={`#collapseOne`} aria-expanded="true" aria-controls="collapseOne">
-                                            `{ele.name}`
-                                            <span style={{marginLeft:"500px"}}>
-                                            {ele.orderdate}
-                                            </span>  
-                                            <span style={{marginLeft:"300px"}}>
-                                            {ele.price}
+                                            Name:{ele.name}<br/>
+                                            Address:{ele.address}
+                                            <span style={{marginLeft:"5rem"}}>
+                                            OrderDate:{ele.orderdate}
                                             </span>
+                                            <span style={{marginLeft:"5rem"}}>
+                                            OrderId:{ele.orderid}
+                                            </span>  
+                                            <span style={{marginLeft:"5rem"}}>
+                                            Total Price:{ele.price}
+                                            </span>
+                                            <span style={{marginLeft:"5rem"}}>
+                                            Payment Mode:{ele.mode}
+                                            </span>
+
                                             </button>
                                         </h2>
                                         </div>
                                         
                                         <div id="collapseOne" style={{backgroundColor:"#CD6155",color:"#fff"}} class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                         <div class="card-body" style={{marginLeft:"10px"}}> 
-                                        <div style={{width:"400px"}}>
-                                           <p>OrderId:({ele.orderid})</p> 
+                                        <div>
+                                        <div style={{width:"400px"}}> 
                                            <p>Cakes:({ele.cakes})</p> 
-                                           <p>Address:({ele.address})</p> 
                                            <p>PhoneNo:({ele.phone})</p> 
                                            <p>Pincode:({ele.pincode})</p>
-                                           <p>PaymentMode:({ele.mode})</p>
                                         </div>   
+                                        </div>
                                         </div>
                                         </div>
                                     </div> 

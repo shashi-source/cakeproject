@@ -93,7 +93,7 @@ function Addcake() {
     <button  class="btn btn-link" onClick={uploadImage} style={{color:"black",backgroundColor:"#979A9A ", marginLeft:"25em",marginTop:"-3.1em"}} type="button" id="inputGroupFileAddon04">UPLOAD</button>
                     </div>
                   
-  <button type="submit" class="btn btn-primary" onClick={save}>Save</button>
+  <button type="submit" class="btn btn-primary" onClick={save}>Add cake</button>
 </form>  
       
             </div>

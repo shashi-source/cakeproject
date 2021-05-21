@@ -1,7 +1,7 @@
 import { Component } from "react";
 import {Link,Redirect} from 'react-router-dom';
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast} from "react-toastify";
 
 
 class Details extends Component {
@@ -40,11 +40,10 @@ class Details extends Component {
                     product:this.addCart
                 })
                 console.log(this.state.product);
-                toast("Product : Add to Cart");
-
+                toast.success("Product : Add to Cart",{autoClose:"1000"});
             }
             else{
-                toast("You must Logged In");
+                toast.warning("You must Logged In",{autoClose:"1000"});
             }
         },(err)=>{
             console.log("Error",err)

@@ -7,6 +7,10 @@ class CartSumary extends Component {
            
         }
     }
+    componentDidMount() {
+        console.log(this.props.cakedata);
+    }
+    
     render() {
         return ( 
             <div >

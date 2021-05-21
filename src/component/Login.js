@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 import axios from "axios"
 import { connect } from "react-redux"
-
+import 'react-toastify/dist/ReactToastify.css';
 
 class Login extends Component{
     constructor(props){
@@ -75,7 +75,7 @@ class Login extends Component{
                 localStorage.setItem("name",res.data.name)
                 this.message = res.data;
                 if(this.message.message !== 'Invalid Credentials'){
-                    toast("Welcome to Our CakeShop");                    
+                    toast.success("Welcome to Our CakeShop",{autoClose:"2000"});                    
                     console.log("message ;.....",this.message);
                     this.props.dispatch({
                         type:"LOGIN",
@@ -83,7 +83,7 @@ class Login extends Component{
                     })
                     this.props.history.push('/');
                 } else {
-                    toast("Please Check Your Email or Password");
+                    toast.warning("Please Check Your Email or Password",{autoClose:"2000"});
                 }              
             },(err)=>{
                 console.log("error",err);
