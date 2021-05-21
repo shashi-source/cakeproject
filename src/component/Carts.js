@@ -80,9 +80,6 @@ import Loader from "react-loader-spinner"
                         </div>
                      </div>
                           }
-
-
-                    
                 </div>
     
     
