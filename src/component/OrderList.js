@@ -49,8 +49,8 @@ class OrderList extends Component {
                                         <div class="card-header" id="headingOne">
                                         <h2 class="mb-0">
                                             <button class="btn  btn-block text-left" onClick={(event)=>{
-                                                 console.log(event.target)
-                                            }} type="button" data-toggle="collapse"  data-target={`#collapseOne`} aria-expanded="true" aria-controls="collapseOne">
+                                                //  console.log(event.target)
+                                            }} type="button" data-toggle="collapse"  data-target={"#collapse"+index} aria-expanded="true" aria-controls="collapseOne">
                                             Name:{ele.name}<br/>
                                             Address:{ele.address}
                                             <span style={{marginLeft:"5rem"}}>
@@ -70,7 +70,7 @@ class OrderList extends Component {
                                         </h2>
                                         </div>
                                         
-                                        <div id="collapseOne" style={{backgroundColor:"#CD6155",color:"#fff"}} class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                        <div id={"collapse"+index} style={{backgroundColor:"#CD6155",color:"#fff"}} class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                         <div class="card-body" style={{marginLeft:"10px"}}> 
                                         <div>
                                         <div style={{width:"400px"}}> 
