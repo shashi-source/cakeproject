@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import Loader from 'react-loader-spinner'
+// import Loader from 'react-loader-spinner'
 import { toast } from 'react-toastify'
 
 class Product extends Component {

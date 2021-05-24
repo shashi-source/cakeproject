@@ -24,7 +24,6 @@ function DashBoard() {
     (error) => {
         console.log(error);
      }
-    
 )
   }, [])
 

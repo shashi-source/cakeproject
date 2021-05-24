@@ -1,7 +1,6 @@
 import axios from 'axios'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import {Link} from 'react-router-dom'
 
 class OrderList extends Component {
     constructor(props) {
@@ -11,7 +10,6 @@ class OrderList extends Component {
         }
     }
     componentDidMount() {
-        // console.log(this.props)
         // https://apifromashu.herokuapp.com/api/addcake,post,object
         let apiurl="https://apifromashu.herokuapp.com/api/cakeorders"
         axios({
@@ -23,6 +21,7 @@ class OrderList extends Component {
             this.setState({
                 orderCakeList:res.data.cakeorders
             });
+            
         },(err)=>{
             console.log("Error",err)
         })
@@ -52,7 +51,8 @@ class OrderList extends Component {
                                                 //  console.log(event.target)
                                             }} type="button" data-toggle="collapse"  data-target={"#collapse"+index} aria-expanded="true" aria-controls="collapseOne">
                                             Name:{ele.name}<br/>
-                                            Address:{ele.address}
+                                            Address:{ele.address}<br/>
+                                            PhoneNo:{ele.phone} 
                                             <span style={{marginLeft:"5rem"}}>
                                             OrderDate:{ele.orderdate}
                                             </span>
@@ -70,14 +70,26 @@ class OrderList extends Component {
                                         </h2>
                                         </div>
                                         
-                                        <div id={"collapse"+index} style={{backgroundColor:"#CD6155",color:"#fff"}} class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                        <div id={"collapse"+index} style={{backgroundColor:"#E3D8DB",color:"#333"}} class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                         <div class="card-body" style={{marginLeft:"10px"}}> 
                                         <div>
-                                        <div style={{width:"400px"}}> 
-                                           <p>Cakes:({ele.cakes})</p> 
-                                           <p>PhoneNo:({ele.phone})</p> 
-                                           <p>Pincode:({ele.pincode})</p>
-                                        </div>   
+                                        {ele.cakes.map((each)=>{
+                                            console.log(each);
+                                            return(
+                                                <div style={{width:"400px"}}> 
+                                                   <tr>
+                                                   <td><img src={each.image} style={{height:"50px",width:"50px"}}/></td>
+                                                   
+                                                   <td style={{listStyle:"none"}}>
+                                                       <ul>
+                                                           <li>Name : {each.name}</li>
+                                                           <li>Price : {each.price}</li>
+                                                       </ul>
+                                                       </td> 
+                                                   </tr>
+                                                </div>
+                                            )
+                                        })}   
                                         </div>
                                         </div>
                                         </div>

@@ -7,25 +7,24 @@ import {toast} from 'react-toastify'
      constructor(props) {
          super(props)
          this.state={
-            price:0
+            // price:0
          }
      }
      total=0
-     cakes=[]
+    //  cartcakes=[]
     componentDidMount() {
-        console.log(this.props.order_place)
+        console.log(this.props.order_place.data)
         this.props.order_place.data.map((each)=>{
-            // console.log(each)
-             this.cakes.push(each.name);
+            console.log(each)
             this.total=this.total+each.price;
-            this.setState({
-                price:this.total
-            })
+            // this.setState({
+            //     price:this.total
+            // })
         });
         // console.log(this.cakes)
         // console.log(this.total);  
         this.placeOrder.price=this.total
-        this.placeOrder.cakes=this.cakes
+        // this.placeOrder.cakes=this.cakes
         
     }
     placeOrder={}
@@ -48,21 +47,22 @@ import {toast} from 'react-toastify'
     
     orderPlace=(event)=>{
         event.preventDefault()
-        // console.log(this.placeOrder);     
+        this.placeOrder.cakes=this.props.order_place.data
+        console.log(this.placeOrder);     
         let apiurl="https://apifromashu.herokuapp.com/api/addcakeorder"
-        axios({
-            method:"post",
-            url:apiurl,
-            data:this.placeOrder,
-            headers:{"authtoken":localStorage.tokenId}
-        }).then((res)=>{
-            toast.success(res.data.messageg,{autoClose:2000})
-            this.props.dispatch({
-                type:"PLACED_ORDERS",
-                payload:res.data
-            })
-           
-        },(err)=>{console.log(err)})
+        
+            axios({
+                method:"post",
+                url:apiurl,
+                data:this.placeOrder,
+                headers:{"authtoken":localStorage.tokenId}
+            }).then((res)=>{
+                if(res.data.messageg==="order placed"){
+                    toast.success("Your Order is placed 😍",{autoClose:2000})           
+                }else{
+                    toast.warn("Please fill all fields are required !🙂")
+                }
+            },(err)=>{console.log(err)})
     }
     
     render(){
@@ -74,33 +74,48 @@ import {toast} from 'react-toastify'
             <form style={{ marginTop: "10em" ,width:"60vw"}}>
             <div class="form-row">
                 <div class="col-md-4 mb-3">
-                  <label for="validationDefault01" style={{width:"50vw" ,fontSize:"1em"}}>Name</label>
-                  <input type="text" onChange={this.userName.bind(this)} class="form-control" style={{width:"50vw" ,height: "3em" }}id="validationDefault01" placeholder="First name" required />
+                  <label for="validationServer01" style={{width:"50vw" ,fontSize:"1em"}}>Name</label>
+                  <input type="text" onChange={this.userName.bind(this)} class="form-control" style={{width:"50vw" ,height: "3em" }} id="validationServer01"  placeholder="First name" required />
+                  <div id="validationServer01Feedback" class="invalid-feedback">
+                    Please provide a valid Name.
+                 </div>
                 </div> 
               </div>
               <div class="form-row">
                 <div class="col-md-4 mb-3">
-                  <label for="validationDefault01" style={{width:"50vw",fontSize:"1em"}}>Phone</label>
-                  <input type="number" onChange={this.phone.bind(this)} class="form-control" style={{width:"50vw" ,height: "3em" }}id="validationDefault01" placeholder="Phone" required />
+                  <label for="validationServer02" style={{width:"50vw",fontSize:"1em"}}>Phone</label>
+                  <input type="number" onChange={this.phone.bind(this)} class="form-control" style={{width:"50vw" ,height: "3em" }} id="validationServer02" placeholder="Phone" required />
+                  <div id="validationServer02Feedback" class="invalid-feedback">
+                     Please provide a valid PhoneNo.
+                </div> 
                 </div> 
               </div>
               <div class="form-row">
                 <div class="col-md-4 mb-3">
-                  <label for="validationDefault01" style={{width:"50vw" ,fontSize:"1em"}}>Address</label>
-                  <input type="text" onChange={this.address.bind(this)} class="form-control" style={{width:"50vw" ,height: "3em" }}id="validationDefault01" placeholder="Address" required />
+                  <label for="validationServer03" style={{width:"50vw" ,fontSize:"1em"}}>Address</label>
+                  <input type="text" onChange={this.address.bind(this)} class="form-control" style={{width:"50vw" ,height: "3em" }} id="validationServer03" placeholder="Address" required />
+                  <div id="validationServer03Feedback" class="invalid-feedback">
+                    Please provide a valid Address.
+                    </div>
                 </div> 
             </div>
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
-                    <label for="validationDefault03">City</label>
-                    <input type="text" class="form-control" onChange={this.city.bind(this)} id="validationDefault03" placeholder="City" required />
+                    <label for="validationServer04">City</label>
+                    <input type="text" class="form-control" onChange={this.city.bind(this)} id="validationServer04" placeholder="City" required />
+                    <div id="validationServer04Feedback" class="invalid-feedback">
+                     Please provide a valid city.
+                    </div>
                     </div>    
                     <div class="col-md-3 mb-3">
-                    <label for="validationDefault05">Pincode</label>
-                    <input type="number" class="form-control" onChange={this.pin.bind(this)} id="validationDefault05" placeholder="Pin Code" required />
+                    <label for="validationServer05">Pincode</label>
+                    <input type="number" class="form-control" onChange={this.pin.bind(this)} id="validationServer05" placeholder="Pin Code" required />
+                    <div id="validationServer05Feedback" class="invalid-feedback">
+                         Please provide a valid pin code.
+                     </div>
                     </div>
                 </div>  
-                            <button class="btn btn-primary" type="submit" onClick={this.orderPlace} style={{ marginRight:"2em",marginTop:"1em"}}>Place Order</button>
+                <button class="btn btn-primary" type="submit" onClick={this.orderPlace} style={{ marginRight:"2em",marginTop:"1em"}}>Place Order</button>
                 </form>
                  </div>
           </main>  
@@ -108,7 +123,7 @@ import {toast} from 'react-toastify'
     }
 }
 export default connect((state,props)=>{
-// console.log(state);
+console.log(state);
 return{
     order_place:state["order_place"]
 }

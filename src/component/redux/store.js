@@ -7,9 +7,9 @@ var store  = createStore(shashi,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__
 store.dispatch({
     type:"PLACE_ORDER"
 })
-store.dispatch({
-    type:"PLACED_ORDERS"
-})
+// store.dispatch({
+//     type:"PLACED_ORDERS"
+// })
 store.dispatch({
     type:"ORDER_LIST"
 })

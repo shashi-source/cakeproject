@@ -13,12 +13,7 @@ class Signup extends Component{
             
         }
     }
-// handlevalidation
-
-
-    //empty array
    signup={}
-//    signups=[]  
 
 // handler
 getEmail=(event)=>{
