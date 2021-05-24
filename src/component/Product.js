@@ -25,28 +25,25 @@ class Product extends Component {
 
     remove = () => {
         // console.log(this.props.cakecart)
-        
         this.setState({isloading:true})
         axios.post('https://apifromashu.herokuapp.com/api/removecakefromcart', { cakeid: this.props.cakecart.cakeid },
             { headers: { "authtoken": localStorage.tokenId } })
             .then((res) => {            
-            console.log(res);      
+            console.log(res.data);      
             if(res.data.message==="Removed  item from cart"){
                 toast.warn("Item is removed");
                 this.setState({
                     cakeinfos:this.cakeinfos.splice(0,1)
                 })         
+                window.location.href="/cart"
             }
         }, (err) => {
             console.log(err)
         })
     }
-    
-   
+     
     price={}
   
-    
-    
     render() {
         // console.log(this.state.cakeInfos)
         return (

@@ -19,7 +19,7 @@ function CakeDetails(props){
         method:"get",
         url:apiurl
       }).then((res)=>{
-        console.log("res",res.data);
+        // console.log("res",res.data);
         setCakes(res.data.data)
         setloading(false)
       },(err)=>{

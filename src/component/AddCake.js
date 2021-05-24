@@ -46,7 +46,7 @@ function Addcake() {
             headers:{"authtoken":localStorage.tokenId}
         })
             .then((res) =>{
-                console.log(res, "New Cake added");
+                // console.log(res, "New Cake added");
                 toast.success("New Cake Added Successfuly",{autoClose:2000});
         })
     }

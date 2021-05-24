@@ -17,7 +17,7 @@ class ConfirmCheckout extends Component {
         axios.post("https://apifromashu.herokuapp.com/api/cakecart",{},{ 
            headers:{"authtoken":localStorage.tokenId}
         }).then((res)=>{
-            console.log("res",res.data);
+            // console.log("res",res.data);
            //  this.cakes.push(res.data.data)
            this.setState({
                cake:res.data.data

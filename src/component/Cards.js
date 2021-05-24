@@ -12,9 +12,9 @@ class Cards extends Component {
         // this.NavigationDemo()
     }
         userAuthenticate=()=>{
-            console.log("res",this.props)
+            // console.log("res",this.props)
             var getToken=localStorage.getItem("tokenId",JSON.stringify("tokenId"))
-            console.log(getToken);
+            // console.log(getToken);
             
         }
 
