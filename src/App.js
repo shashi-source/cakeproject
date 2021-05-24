@@ -20,14 +20,14 @@ import OrderList from './component/OrderList';
 import AddCake from './component/AddCake';
 import Routes from './component/Routes';
 import CartUi from './component/CartUi';
-import {connect} from 'react-redux'
+// import {connect} from 'react-redux'
 const OtherComponent = React.lazy(() => import('./component/DashBoard'));
 
-function App(props) {
+function App() {
   // console.log("sss",props)
-  props.dispatch({
-    type:"LOGIN"
-  })
+  // props.dispatch({
+  //   type:"LOGIN"
+  // })
   return (
     <div className="App">
       <BrowserRouter>
@@ -60,9 +60,4 @@ function App(props) {
     </div>
   );
 }
-export default connect((state,props)=>{
-console.log(state)
-return{
-  isloggedin:state["isloggedin"]
-}
-})(App);
+export default App
