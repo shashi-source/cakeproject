@@ -82,7 +82,7 @@ class Navbar extends Component{
     }
 }
 export default connect((state, props) => {
-    console.log(state);
+    // console.log(state);
     // alert(state.isloggedin)
     return {
       isloggedin:state["isloggedin"]}

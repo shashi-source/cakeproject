@@ -10,7 +10,7 @@ class Login extends Component{
         super(props)
         this.getEmail=this.getEmail.bind(this);
         this.getPass=this.getPass.bind(this);
-        this.userLogin=this.userLogin.bind(this);
+        this.fetchuseraxios=this.fetchuseraxios.bind(this);
         this.state={
             login:{},
             nameErr:"",
@@ -19,20 +19,37 @@ class Login extends Component{
     }
     // for vaildation
     vaild=()=>{
-     if( !this.state.login.email && !this.state.login.password && !this.state.login.email.includes("@") && this.state.login.password.length<4){
+        if(!this.state.login.email ){
             this.setState({
-                nameErr:"Invaild Email",
-                passErr:"password length must be 4 Character"
+                nameErr:"please enter your Email",
+                
             })
         }
-        else if(!this.state.login.email && !this.state.login.password && !this.state.login.email.includes("@") && this.state.login.email==="" ){
+        else if(!this.state.login.password){
+            this.setState({
+                passErr:"please fill your vaild password"
+            })
+        }
+        else if(!this.state.login.email && !this.state.login.password || !this.state.login.email.includes("@")){
+            this.setState({
+                nameErr:"Invaild Credentails",
+                passErr:"Password length must be aleast 4 or above Character"
+            })
+        }
+        else if(this.state.login.email && !this.state.login.email.includes("@")){
             this.setState({
                 nameErr:"Invaild Email"
             })
         }
-        else if(!this.state.login.email && !this.state.login.password && this.state.login.password.length<4){
+        
+        else if(!this.state.login.password || this.state.login.password.length<4){
             this.setState({
-                passErr:"password length must be 4 Character"
+                passErr:"Please Enter Your Vaild Password"
+            })
+        }
+        else if(!this.state.login.password  && this.state.login.password.length<4){
+            this.setState({
+                passErr:"Password length must be aleast 4 or above Character"
             })
         }
         else{
@@ -54,7 +71,7 @@ class Login extends Component{
             login:this.login
         })
     }
-    userLogin=(e)=>{
+    fetchuseraxios=(e)=>{
         this.setState({
             nameErr:"",
             passErr:""
@@ -70,13 +87,14 @@ class Login extends Component{
             }).then((res) => {
                 console.log("my mess", res);
                 console.log(res.data.token);
-                // localstorage
-                localStorage.setItem("tokenId",res.data.token)
-                localStorage.setItem("name",res.data.name)
                 this.message = res.data;
                 if(this.message.message !== 'Invalid Credentials'){
                     toast.success("Welcome to Our CakeShop",{autoClose:"2000"});                    
                     console.log("message ;.....",this.message);
+                  // Set localstorage
+                    localStorage.setItem("tokenId",res.data.token)
+                    localStorage.setItem("name",res.data.name)
+                    localStorage.setItem("role",res.data.role)
                     this.props.dispatch({
                         type:"LOGIN",
                         payload:res.data
@@ -87,44 +105,31 @@ class Login extends Component{
                 }              
             },(err)=>{
                 // console.log("error",err);
-                toast.warn("Email/Password should not be Empty");
+                toast.warning("Please Fill all Field ");
             })                     
         }      
     }
     render(){
         return(
-            // 
-        <div style={{backgroundColor:"lightgray",height:"500px"}}>
-            <div style={{margin:"100px"}}>
+        <div style={{backgroundColor:"lightgray" ,height:"350px"}}>
+            <div style={{height:"300px" ,width:"400px" ,margin:"100px 450px"}}>
                 <form>
                     <h1 style={{color:"red"}}>Login Form</h1>
-                    <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-                     <div class="col-sm-10">
-                       <input type="email" class="form-control" id="inputEmail3" onChange={this.getEmail} />
-                        <p style={{color:"red"}}>{this.state.nameErr}</p>
-
-                     </div>
-                    </div>
-               
-                <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword3" onChange={this.getPass} />
-                    <p style={{color:"red"}}>{this.state.passErr}</p>
-                    </div>
+                <div className="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={this.getEmail}></input>
+                    <p style={{color:"red"}}>{this.state.nameErr}</p>
                 </div>
-                <div class="form-group row">
-                    <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary" onClick={this.userLogin}>Sign in</button>
-                    </div>
+                <div className="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" className="form-control" id="exampleInputPassword1" onChange={this.getPass}></input>
+                <p style={{color:"red"}}>{this.state.passErr}</p>
                 </div>
-                <div class="form-group row">
-                    <div class="col-sm-10">
-                      <span>Create Account<Link to="/signup">SignUp</Link></span>&emsp;&emsp;
-                      &emsp;&emsp;<Link to="/Forgetpass"><a href="">Forgetpassword?</a></Link>
-                    </div>
-                </div>
+              <button type="submit" className="btn btn-primary" onClick={this.fetchuseraxios}>Login</button>
+              <br></br>
+                 <span>Create Account<Link to="/signup">SignUp</Link></span>&emsp;&emsp;
+                &emsp;&emsp; 
+                <Link to="/Forgetpass"><a href="">Forgetpassword?</a></Link>
                 </form>
             </div>
         </div>

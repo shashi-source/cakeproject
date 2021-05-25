@@ -1,6 +1,8 @@
 import {Component} from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
+import { toast } from "react-toastify"
+
 class Signup extends Component{
 
     constructor(){
@@ -40,17 +42,21 @@ getName=(event)=>{
 userSignup=(e)=>{
     e.preventDefault();
     console.log(this.signup);
-            
         axios({
             method:"post",
             url:"https://apifromashu.herokuapp.com/api/register",
             data:this.signup
         }).then((res)=>{
-            console.log("response",res);
+            console.log("response",res.data.message);
+            if(res.data.message !=="User Already Exists"){
+               toast.success("Register Successdfully");
+            }
+            else{
+                toast.warn("User Is Already Registered");
+            }
         },(err)=>{
             console.log("error",err);
         })  
-    
 }
 
 
@@ -71,7 +77,7 @@ userSignup=(e)=>{
                 </div>
                 <div className="form-group">
                     <label for="exampleInputPassword1">Name</label>
-                    <input type="password" className="form-control" id="exampleInputPassword1" onChange={this.getName}></input>
+                    <input type="text" className="form-control" id="exampleInputPassword1" onChange={this.getName}></input>
                 </div>
                 
                 <Link to="/login"><button type="submit" className="btn btn-primary" onClick={this.userSignup} >SignUp</button></Link>

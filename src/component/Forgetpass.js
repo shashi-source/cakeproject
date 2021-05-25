@@ -1,6 +1,7 @@
 import {Component}  from "react"
 
 import axios from "axios"
+import { toast } from "react-toastify"
 
 class Forgetpass extends Component{
     constructor(){
@@ -14,7 +15,8 @@ class Forgetpass extends Component{
         this.user.email=event.target.value;
     }
 
-    getnewpass=()=>{
+    getnewpass=(event)=>{
+        event.preventDefault()
         console.log("user",this.user);
         axios({
             method:"post",
@@ -22,6 +24,13 @@ class Forgetpass extends Component{
             data:this.user
         }).then((res)=>{
             console.log("res",res);
+            if (res.data.message=="Password Sent to your email") {
+                toast.success("Password has been sent to Your mail");
+                this.props.history.push('/login')
+                console.log("response", res);
+              } else {
+                toast.warning("No Such Email exists")
+              }
         },(err)=>{
             console.log("err",err);
         })

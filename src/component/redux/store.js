@@ -15,6 +15,6 @@ store.dispatch({
 })
 
 
-console.log("after dispatch store ka state" , store.getState()) //to get the state from reducer
+// console.log("after dispatch store ka state" , store.getState()) //to get the state from reducer
 
 export default store

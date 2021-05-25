@@ -5,15 +5,15 @@ import {connect} from 'react-redux'
 import { toast } from 'react-toastify'
 
 class Product extends Component {
-    cakes=[]
-    constructor(props) {
-        super(props)
+    // cakes=[]
+    constructor() {
+        super()
         this.state = {
         qty:1,
         cakeInfos:[]
         }
     }
-
+    // for store all cake details
     cakeinfos=[]
     componentDidMount() {
         this.cakeinfos.push(this.props.cakecart);
@@ -26,22 +26,25 @@ class Product extends Component {
     remove = () => {
         // console.log(this.props.cakecart)
         this.setState({isloading:true})
-        axios.post('https://apifromashu.herokuapp.com/api/removecakefromcart', { cakeid: this.props.cakecart.cakeid },
+        axios.post('https://apifromashu.herokuapp.com/api/removecakefromcart', { cakeid: this.props.cakecart.cakeid },  //404 cakeid: 
             { headers: { "authtoken": localStorage.tokenId } })
             .then((res) => {            
-            console.log(res.data);      
-            if(res.data.message==="Removed  item from cart"){
+            // console.log(res.data);      
+            if(res.data.message === "Removed  item from cart"){
                 toast.warn("Item is removed");
                 this.setState({
                     cakeinfos:this.cakeinfos.splice(0,1)
                 })         
                 window.location.href="/cart"
             }
+            else{
+                toast.warn(" Not 404 Found")// it a msg do not be 
+            }
         }, (err) => {
             console.log(err)
         })
     }
-     
+    //  For Total price
     price={}
   
     render() {
@@ -76,5 +79,5 @@ class Product extends Component {
 }
 // total:this.props.cakecart*this.state.qty
 export default  connect((state,props)=>{
-console.log(state)
+// console.log(state)
 })(Product)
