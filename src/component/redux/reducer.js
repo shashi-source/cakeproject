@@ -5,6 +5,7 @@ export function shashi (state ={},{type,payload}){
             if(localStorage.tokenId){
              state["isloggedin"] = true 
             }
+            return state
         }
         case "LOGIN" :{
          state = {...state}

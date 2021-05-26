@@ -62,7 +62,9 @@ import {toast} from 'react-toastify'
                 }else{
                     toast.warn("Please fill all fields are required !🙂")
                 }
-            },(err)=>{console.log(err)})
+            },(err)=>{
+                toast.warn("Please Fill All Details")    
+            })
     }
     
     render(){
